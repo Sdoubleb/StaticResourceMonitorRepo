@@ -1,0 +1,29 @@
+﻿@model StaticResourceInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Static Resources Download Monitoring</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Download", "StaticResource", FormMethod.Post))
+        {
+            <div>
+                @Html.ValidationSummary()
+            </div>
+            <div>
+                @Html.LabelFor(m => m.Reference)
+                @Html.EditorFor(m => m.Reference)
+                <input type="submit" value="Download" />
+            </div>
+        }
+    </div>
+</body>
+</html>
