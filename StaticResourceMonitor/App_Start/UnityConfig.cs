@@ -1,9 +1,10 @@
 using System;
 using System.Web;
+using StaticResourceMonitor.Downloads;
+using StaticResourceMonitor.Users;
 using Unity;
 using Unity.AspNet.Mvc;
 using Unity.Injection;
-using Unity.Lifetime;
 
 namespace StaticResourceMonitor
 {
@@ -42,11 +43,18 @@ namespace StaticResourceMonitor
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();
+            
+            container.RegisterInstance<UserStorage>(new UserStorage());
+            container.RegisterInstance<DownloadStorage>(new DownloadStorage());
 
-            // TODO: Register your type's mappings here.
-            container.RegisterInstance<Users.UserStorage>(new Users.UserStorage());
-            container.RegisterType<Users.UserInfo>(new PerRequestLifetimeManager(),
-                new InjectionFactory(c => new Users.UserProvider(HttpContext.Current.Request.RequestContext.HttpContext, c.Resolve<Users.UserStorage>()).ProvideUser()));
+            container.RegisterType<UserInfo>(new PerRequestLifetimeManager(),
+                new InjectionFactory(c => CreateUserProvider(c).ProvideUser()));
         }
+
+        private static HttpContextBase CurrentHttpContext
+            => HttpContext.Current.Request.RequestContext.HttpContext;
+
+        private static UserProvider CreateUserProvider(IUnityContainer container)
+            => new UserProvider(CurrentHttpContext, container.Resolve<UserStorage>());
     }
 }

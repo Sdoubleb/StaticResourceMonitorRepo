@@ -12,7 +12,7 @@ namespace StaticResourceMonitor.Downloads
 
         private object _locker = new object();
 
-        public void AddDownload(DownloadInfo download)
+        public void RegisterDownload(DownloadInfo download)
         {
             lock (_locker)
             {

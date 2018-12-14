@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using StaticResourceMonitor.Downloads;
 using StaticResourceMonitor.Helpers;
 using StaticResourceMonitor.Models;
 using StaticResourceMonitor.Users;
@@ -12,10 +13,12 @@ namespace StaticResourceMonitor.Controllers
     public class StaticResourceController : AsyncController
     {
         private readonly UserInfo _user;
+        private readonly DownloadStorage _downloadStorage;
 
-        public StaticResourceController(UserInfo user)
+        public StaticResourceController(UserInfo user, DownloadStorage downloadStorage)
         {
             _user = user;
+            _downloadStorage = downloadStorage;
         }
 
         public ActionResult Index()
@@ -32,6 +35,9 @@ namespace StaticResourceMonitor.Controllers
                 {
                     MemoryStream stream = await GetStaticResourceStreamAsync(info.Reference);                    
                     (string mimeType, string fileName) = ExtractStaticResourceInfo(info);
+
+                    RegisterDownload(info.Reference);
+
                     return File(stream, mimeType, fileName);
                 }
                 catch (HttpRequestException e)
@@ -63,6 +69,12 @@ namespace StaticResourceMonitor.Controllers
             string mimeType = infoExtractor.GetMimeType();
             string fileName = infoExtractor.GetFileName();
             return (mimeType, fileName);
+        }
+
+        private void RegisterDownload(string reference)
+        {
+            var download = new DownloadInfo(reference, _user);
+            _downloadStorage.RegisterDownload(download);
         }
     }
 }

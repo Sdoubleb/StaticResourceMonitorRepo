@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Web.Mvc;
-
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Unity.AspNet.Mvc;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(StaticResourceMonitor.UnityMvcActivator), nameof(StaticResourceMonitor.UnityMvcActivator.Start))]
@@ -22,9 +22,8 @@ namespace StaticResourceMonitor
             FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(UnityConfig.Container));
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(UnityConfig.Container));
-
-            // TODO: Uncomment if you want to use PerRequestLifetimeManager
-            Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
+            
+            DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
         }
 
         /// <summary>
