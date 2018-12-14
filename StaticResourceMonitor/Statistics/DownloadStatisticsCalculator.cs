@@ -27,12 +27,12 @@ namespace StaticResourceMonitor.Statistics
 
         public IEnumerable<ResourceUserDownloadStatistics> GetUserDownloadStatistics()
         {
-            return _userDownloadStatistics.AsEnumerable();
+            return _userDownloadStatistics.ToArray();
         }
 
         public IEnumerable<ResourceDownloadCountStatistics> GetDownloadCountStatistics()
         {
-            return _downloadCountStatistics.AsEnumerable();
+            return _downloadCountStatistics.ToArray();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace StaticResourceMonitor.Downloads
@@ -22,7 +21,7 @@ namespace StaticResourceMonitor.Downloads
 
         public IEnumerable<DownloadInfo> GetAllDownloads()
         {
-            return _downloads.AsEnumerable();
+            return _downloads.ToArray();
         }
     }
 }

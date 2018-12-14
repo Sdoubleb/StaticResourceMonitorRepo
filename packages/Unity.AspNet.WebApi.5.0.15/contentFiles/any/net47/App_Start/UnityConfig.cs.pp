@@ -1,14 +1,8 @@
 using System;
-using System.Web;
-using StaticResourceMonitor.Downloads;
-using StaticResourceMonitor.Statistics;
-using StaticResourceMonitor.Users;
-using Unity;
-using Unity.AspNet.Mvc;
-using Unity.Injection;
-using Unity.Lifetime;
 
-namespace StaticResourceMonitor
+using Unity;
+
+namespace $rootnamespace$
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
@@ -46,18 +40,8 @@ namespace StaticResourceMonitor
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            container.RegisterInstance<UserStorage>(new UserStorage());
-            container.RegisterInstance<DownloadStorage>(new DownloadStorage());
-
-            container.RegisterType<UserProvider>(new PerRequestLifetimeManager(),
-                new InjectionFactory(c => new UserProvider(CurrentHttpContext, container.Resolve<UserStorage>())));
-            container.RegisterType<UserInfo>(new PerRequestLifetimeManager(),
-                new InjectionFactory(c => c.Resolve<UserProvider>().ProvideUser()));
-            container.RegisterType<DownloadStatisticsCalculator>(new TransientLifetimeManager(),
-                new InjectionFactory(c => new DownloadStatisticsCalculator(c.Resolve<DownloadStorage>())));
+            // TODO: Register your type's mappings here.
+            // container.RegisterType<IProductRepository, ProductRepository>();
         }
-
-        private static HttpContextBase CurrentHttpContext
-            => HttpContext.Current.Request.RequestContext.HttpContext;
     }
 }
