@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -31,19 +30,9 @@ namespace StaticResourceMonitor.Controllers
             {
                 try
                 {
-                    using (HttpClient client = new HttpClient())
-                    using (Stream stream = await client.GetStreamAsync(info.Reference))
-                    {
-                        var memoryStream = new MemoryStream(); // не нуждается в освобождении ресурсов
-                        stream.CopyTo(memoryStream);
-                        memoryStream.Position = 0;
-
-                        var infoExtractor = new StaticResourceInfoExtractor(info);
-                        string mimeType = infoExtractor.GetMimeType();
-                        string fileName = infoExtractor.GetFileName();
-
-                        return File(memoryStream, mimeType, fileName);
-                    }
+                    MemoryStream stream = await GetStaticResourceStreamAsync(info.Reference);                    
+                    (string mimeType, string fileName) = ExtractStaticResourceInfo(info);
+                    return File(stream, mimeType, fileName);
                 }
                 catch (HttpRequestException e)
                 {
@@ -54,6 +43,26 @@ namespace StaticResourceMonitor.Controllers
                 }
             }
             return View("Index");
+        }
+
+        private async Task<MemoryStream> GetStaticResourceStreamAsync(string reference)
+        {
+            using (HttpClient client = new HttpClient())
+            using (Stream stream = await client.GetStreamAsync(reference))
+            {
+                var memoryStream = new MemoryStream(); // не нуждается в освобождении ресурсов
+                stream.CopyTo(memoryStream);
+                memoryStream.Position = 0;
+                return memoryStream;
+            }
+        }
+
+        private (string mimeType, string fileName) ExtractStaticResourceInfo(StaticResourceInfo info)
+        {
+            var infoExtractor = new StaticResourceInfoExtractor(info);
+            string mimeType = infoExtractor.GetMimeType();
+            string fileName = infoExtractor.GetFileName();
+            return (mimeType, fileName);
         }
     }
 }

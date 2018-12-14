@@ -8,7 +8,7 @@ namespace StaticResourceMonitor.Models
     {
         private const string FILE_NAME_GROUP = "filename";
 
-        // некоторые форматы
+        // некоторые форматы изображений
         public static string[] GIF_EXTENSIONS = new string[] { @"gif" };
         public static string[] PNG_EXTENSIONS = new string[] { @"png" };
         public static string[] TIFF_EXTENSIONS = new string[] { @"tif", @"tiff" };
