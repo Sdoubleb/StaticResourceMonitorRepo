@@ -18,8 +18,7 @@ namespace StaticResourceMonitor.Users
 
         public UserInfo ProvideUser()
         {
-            Guid userId;
-            if (!Guid.TryParse(GetUserIdFromCookie(), out userId))
+            if (!Guid.TryParse(GetUserIdFromCookie(), out Guid userId))
             {
                 userId = Guid.NewGuid();
                 SetUserIdIntoCookie(userId.ToString());

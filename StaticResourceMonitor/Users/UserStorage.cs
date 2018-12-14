@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace StaticResourceMonitor.Users
 {
@@ -19,8 +16,7 @@ namespace StaticResourceMonitor.Users
 
         public UserInfo GetUser(Guid id)
         {
-            UserInfo user;
-            return _users.TryGetValue(id, out user) ? user : null;
+            return _users.TryGetValue(id, out UserInfo user) ? user : null;
         }
     }
 }

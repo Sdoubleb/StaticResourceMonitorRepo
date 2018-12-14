@@ -48,8 +48,7 @@ namespace StaticResourceMonitor.Controllers
                 catch (HttpRequestException e)
                 {
                     ModelState.AddModelError("", e.Message);
-                    int responseCode;
-                    Response.StatusCode = Utils.TryExtractResponseCode(e, out responseCode)
+                    Response.StatusCode = Utils.TryExtractResponseCode(e, out int responseCode)
                         ? responseCode
                         : (int)HttpStatusCode.BadRequest;
                 }

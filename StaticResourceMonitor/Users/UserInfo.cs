@@ -12,14 +12,7 @@ namespace StaticResourceMonitor.Users
         public Guid Id { get; }
 
         public override bool Equals(object obj)
-        {
-            if (obj is UserInfo)
-            {
-                var aUser = obj as UserInfo;
-                return Id == aUser.Id;
-            }
-            return false;
-        }
+            => obj is UserInfo aUser && Id == aUser.Id;
 
         public override int GetHashCode()
             => Id.GetHashCode();
