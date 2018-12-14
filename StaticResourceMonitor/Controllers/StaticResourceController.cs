@@ -1,15 +1,24 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using StaticResourceMonitor.Helpers;
 using StaticResourceMonitor.Models;
+using StaticResourceMonitor.Users;
 
 namespace StaticResourceMonitor.Controllers
 {
     public class StaticResourceController : AsyncController
     {
+        private readonly UserInfo _user;
+
+        public StaticResourceController(UserInfo user)
+        {
+            _user = user;
+        }
+
         public ActionResult Index()
         {
             return View();
