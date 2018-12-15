@@ -1,0 +1,23 @@
+﻿h2, .big-block {
+    margin: 20px;
+    margin-left: 16px;
+}
+
+.edit-block {
+    margin: 8px;
+    margin-left: 0px;
+}
+
+    .edit-block > div {
+        margin: 4px;
+    }
+
+    .edit-block input[type="text"] {
+        width: 240px;
+        height: 24px
+    }
+
+    .edit-block input[type="submit"] {
+        width: 240px;
+        height: 48px;
+    }

@@ -4,16 +4,31 @@
     Layout = "~/Views/StaticResource/Layout.cshtml";
 }
 
+<h2>Static Resource Download Monitoring</h2>
+
 <div>
-    @using (Html.BeginForm("Download", "StaticResource", FormMethod.Post))
-    {
+
+    <div class="big-block">
         <div>
-            @Html.ValidationSummary()
+            <a href="@Url.Action("UserDownloadStatistics")">Statistics by users</a>
         </div>
         <div>
-            @Html.LabelFor(m => m.Reference)
-            @Html.EditorFor(m => m.Reference)
-            <input type="submit" value="Download" />
+            <a href="@Url.Action("DownloadCountStatistics")">Statistics by count of downloads</a>
         </div>
-    }
+    </div>
+
+    <div class="big-block">
+        @using (Html.BeginForm("Download", "StaticResource", FormMethod.Post))
+        {
+            <div class="edit-block">
+                <div>@Html.LabelFor(m => m.Reference)</div>
+                <div>@Html.EditorFor(m => m.Reference)</div>
+                <div><input type="submit" value="Download" /></div>
+            </div>
+            <div>
+                @Html.ValidationSummary()
+            </div>
+        }
+    </div>
+
 </div>
