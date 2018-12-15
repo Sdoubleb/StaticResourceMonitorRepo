@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using StaticResourceMonitor.Models.Statistics;
 using StaticResourceMonitor.Statistics;
 
 namespace StaticResourceMonitor.Controllers
@@ -14,15 +16,24 @@ namespace StaticResourceMonitor.Controllers
         }
 
         [HttpGet, Route("api/statistics/users")]
-        public IEnumerable<ResourceUserDownloadStatistics> GetUserDownloadStatistics()
+        public IEnumerable<ResourceUserDownloadData> GetUserDownloadStatistics()
         {
-            return _calculator.GetUserDownloadStatistics();
+            return _calculator.GetUserDownloadStatistics().Select(s => new ResourceUserDownloadData
+            {
+                Resource = s.Resource,
+                User = s.User.Id,
+                LastDownloadDateTime = s.LastDownloadDateTime
+            });
         }
 
         [HttpGet, Route("api/statistics/count")]
-        public IEnumerable<ResourceDownloadCountStatistics> GetDownloadCountStatistics()
+        public IEnumerable<ResourceDownloadCountData> GetDownloadCountStatistics()
         {
-            return _calculator.GetDownloadCountStatistics();
+            return _calculator.GetDownloadCountStatistics().Select(s => new ResourceDownloadCountData
+            {
+                Resource = s.Resource,
+                DownloadCount = s.DownloadCount
+            });
         }
     }
 }

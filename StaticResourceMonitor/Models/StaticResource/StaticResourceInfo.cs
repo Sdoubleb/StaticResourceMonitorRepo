@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace StaticResourceMonitor.Models
+namespace StaticResourceMonitor.Models.StaticResource
 {
     [StaticResourceInfoValidation(ErrorMessage = "Please enter a correct reference to a static resource.")]
     public class StaticResourceInfo

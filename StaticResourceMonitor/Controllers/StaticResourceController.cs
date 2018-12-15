@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using StaticResourceMonitor.Downloads;
 using StaticResourceMonitor.Helpers;
-using StaticResourceMonitor.Models;
+using StaticResourceMonitor.Models.StaticResource;
 using StaticResourceMonitor.Users;
 
 namespace StaticResourceMonitor.Controllers

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace StaticResourceMonitor.Models
+namespace StaticResourceMonitor.Models.StaticResource
 {
     [AttributeUsage(AttributeTargets.Class)]
     class StaticResourceInfoValidationAttribute : ValidationAttribute

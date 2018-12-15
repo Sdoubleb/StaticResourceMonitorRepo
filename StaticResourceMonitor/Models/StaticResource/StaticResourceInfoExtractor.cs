@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Net.Mime;
 
-namespace StaticResourceMonitor.Models
+namespace StaticResourceMonitor.Models.StaticResource
 {
     class StaticResourceInfoExtractor
     {

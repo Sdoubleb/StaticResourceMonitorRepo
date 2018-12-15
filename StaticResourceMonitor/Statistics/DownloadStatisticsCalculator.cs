@@ -7,30 +7,30 @@ namespace StaticResourceMonitor.Statistics
     public partial class DownloadStatisticsCalculator
     {
         private readonly IEnumerable<DownloadInfo> _allDownloads;
-        private readonly IEnumerable<ResourceUserDownloadStatistics> _userDownloadStatistics;
-        private readonly IEnumerable<ResourceDownloadCountStatistics> _downloadCountStatistics;
+        private readonly IEnumerable<ResourceUserDownload> _userDownloadStatistics;
+        private readonly IEnumerable<ResourceDownloadCount> _downloadCountStatistics;
 
         public DownloadStatisticsCalculator(DownloadStorage storage)
         {
             _allDownloads = storage.GetAllDownloads();
             _userDownloadStatistics = _allDownloads.GroupBy(d => d, new DownloadEqualityComparer())
-                .Select(g => new ResourceUserDownloadStatistics(g.Key.Reference, g.Key.User)
+                .Select(g => new ResourceUserDownload(g.Key.Reference, g.Key.User)
                 {
                     LastDownloadDateTime = g.Max(d => d.DateTime)
                 });
             _downloadCountStatistics = _userDownloadStatistics.GroupBy(s => s.Resource)
-                .Select(g => new ResourceDownloadCountStatistics(g.Key)
+                .Select(g => new ResourceDownloadCount(g.Key)
                 {
                     DownloadCount = g.Count()
                 });
         }
 
-        public IEnumerable<ResourceUserDownloadStatistics> GetUserDownloadStatistics()
+        public IEnumerable<ResourceUserDownload> GetUserDownloadStatistics()
         {
             return _userDownloadStatistics.ToArray();
         }
 
-        public IEnumerable<ResourceDownloadCountStatistics> GetDownloadCountStatistics()
+        public IEnumerable<ResourceDownloadCount> GetDownloadCountStatistics()
         {
             return _downloadCountStatistics.ToArray();
         }

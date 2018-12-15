@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace StaticResourceMonitor.Models
+namespace StaticResourceMonitor.Models.StaticResource
 {
     static class StaticResourceConstants
     {
