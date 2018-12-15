@@ -21,6 +21,7 @@ namespace StaticResourceMonitor.Controllers
             _downloadStorage = downloadStorage;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -75,6 +76,18 @@ namespace StaticResourceMonitor.Controllers
         {
             var download = new DownloadInfo(reference, _user);
             _downloadStorage.RegisterDownload(download);
+        }
+
+        [HttpGet, ActionName("UserDownloadStatistics")]
+        public ActionResult ShowUserDownloadStatistics()
+        {
+            return View();
+        }
+
+        [HttpGet, ActionName("DownloadCountStatistics")]
+        public ActionResult ShowDownloadCountStatistics()
+        {
+            return View();
         }
     }
 }
