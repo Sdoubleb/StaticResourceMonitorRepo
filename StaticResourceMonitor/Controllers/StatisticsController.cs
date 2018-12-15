@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using StaticResourceMonitor.Statistics;
 
@@ -17,31 +13,16 @@ namespace StaticResourceMonitor.Controllers
             _calculator = calculator;
         }
 
-        // GET api/statistics
-        public IEnumerable<ResourceUserDownloadStatistics> Get()
+        [HttpGet, Route("api/statistics/users")]
+        public IEnumerable<ResourceUserDownloadStatistics> GetUserDownloadStatistics()
         {
             return _calculator.GetUserDownloadStatistics();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpGet, Route("api/statistics/count")]
+        public IEnumerable<ResourceDownloadCountStatistics> GetDownloadCountStatistics()
         {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            return _calculator.GetDownloadCountStatistics();
         }
     }
 }
