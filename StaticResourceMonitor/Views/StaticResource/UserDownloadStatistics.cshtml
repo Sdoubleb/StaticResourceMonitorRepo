@@ -3,7 +3,61 @@
 }
 
 <div>
+    <table id="statistics-table" class="display" style="display: none">
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Row 1 Data 1</td>
+                <td>Row 1 Data 2</td>
+                <td>Row 1 Data 3</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
+<link type="text/css" rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css" />
 <script type="text/javascript" charset="utf-8" src="~/Scripts/JQuery/jquery-3.3.1.js"></script>
 <script type="text/javascript" charset="utf-8" src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#statistics-table").DataTable();
+        var timeout = 4000;
+        setInterval(function () {
+            GetStatistics(UpdateTable);
+        }, timeout);
+    });
+    
+    function GetStatistics(onSuccess) {
+        $.ajax({
+            url: "/api/statistics/users",
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+                onSuccess(data);
+            },
+            error: function (x, y, z) {
+                alert(x + "\n" + y + "\n" + z);
+            }
+        });
+    }
+
+    function UpdateTable(statistics) {
+        var tableContent = "<thead><tr><th>Resource</th><th>User</th><th>Last Download Time</th></tr></thead><tbody>";
+        $.each(statistics, function (index, data) {
+            tableContent += "<tr><td>" + data.Resource + "</td><td> " + data.User + "</td><td>" +
+                data.LastDownloadDateTime + "</td></tr>";
+        });
+        tableContent += "</tbody>";
+        $("#statistics-table").html(tableContent);
+        $("#statistics-table").show();
+    }
+
+</script>
