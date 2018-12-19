@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StaticResourceMonitor.Downloads
 {
-    public class DownloadStorage
+    public class DownloadStorage : IDownloadStorage
     {
         private const int INITIAL_CAPACITY = Byte.MaxValue + 1;
 

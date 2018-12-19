@@ -13,9 +13,9 @@ namespace StaticResourceMonitor.Controllers
     public class StaticResourceController : AsyncController
     {
         private readonly UserInfo _user;
-        private readonly DownloadStorage _downloadStorage;
+        private readonly IDownloadStorage _downloadStorage;
 
-        public StaticResourceController(UserInfo user, DownloadStorage downloadStorage)
+        public StaticResourceController(UserInfo user, IDownloadStorage downloadStorage)
         {
             _user = user;
             _downloadStorage = downloadStorage;

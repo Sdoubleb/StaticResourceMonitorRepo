@@ -4,13 +4,13 @@ using StaticResourceMonitor.Downloads;
 
 namespace StaticResourceMonitor.Statistics
 {
-    public partial class DownloadStatisticsCalculator
+    public partial class DownloadStatisticCalculator
     {
         private readonly IEnumerable<DownloadInfo> _allDownloads;
         private readonly IEnumerable<ResourceUserDownload> _userDownloadStatistics;
         private readonly IEnumerable<ResourceDownloadCount> _downloadCountStatistics;
 
-        public DownloadStatisticsCalculator(DownloadStorage storage)
+        public DownloadStatisticCalculator(IDownloadStorage storage)
         {
             _allDownloads = storage.GetAllDownloads();
             _userDownloadStatistics = _allDownloads.GroupBy(d => d, new DownloadEqualityComparer())

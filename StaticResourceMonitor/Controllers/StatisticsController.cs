@@ -8,9 +8,9 @@ namespace StaticResourceMonitor.Controllers
 {
     public class StatisticsController : ApiController
     {
-        private DownloadStatisticsCalculator _calculator;
+        private IDownloadStatisticCalculator _calculator;
 
-        public StatisticsController(DownloadStatisticsCalculator calculator)
+        public StatisticsController(IDownloadStatisticCalculator calculator)
         {
             _calculator = calculator;
         }

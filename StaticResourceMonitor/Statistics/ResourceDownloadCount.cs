@@ -1,5 +1,8 @@
 ﻿namespace StaticResourceMonitor.Statistics
 {
+    /// <summary>
+    /// Отражает количество загрузок ресурса уникальными пользователями.
+    /// </summary>
     public class ResourceDownloadCount
     {
         public ResourceDownloadCount(string resource)

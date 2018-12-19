@@ -46,15 +46,16 @@ namespace StaticResourceMonitor
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();
 
-            container.RegisterInstance<UserStorage>(new UserStorage());
-            container.RegisterInstance<DownloadStorage>(new DownloadStorage());
+            container.RegisterInstance<IUserStorage>(new UserStorage());
+            container.RegisterInstance<IDownloadStorage>(new DownloadStorage());
 
-            container.RegisterType<UserProvider>(new PerRequestLifetimeManager(),
-                new InjectionFactory(c => new UserProvider(CurrentHttpContext, container.Resolve<UserStorage>())));
+            container.RegisterType<IUserProvider>(new PerRequestLifetimeManager(),
+                new InjectionFactory(c => new CookieUserProvider(CurrentHttpContext,
+                    container.Resolve<IUserStorage>())));
             container.RegisterType<UserInfo>(new PerRequestLifetimeManager(),
-                new InjectionFactory(c => c.Resolve<UserProvider>().ProvideUser()));
-            container.RegisterType<DownloadStatisticsCalculator>(new TransientLifetimeManager(),
-                new InjectionFactory(c => new DownloadStatisticsCalculator(c.Resolve<DownloadStorage>())));
+                new InjectionFactory(c => c.Resolve<IUserProvider>().ProvideUser()));
+            container.RegisterType<IDownloadStatisticCalculator>(new TransientLifetimeManager(),
+                new InjectionFactory(c => new DownloadStatisticCalculator(c.Resolve<IDownloadStorage>())));
         }
 
         private static HttpContextBase CurrentHttpContext

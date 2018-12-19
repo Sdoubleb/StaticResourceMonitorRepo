@@ -374,6 +374,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\StaticResourceController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Downloads\IDownloadStorage.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -386,11 +387,14 @@
     <Compile Include="Models\Statistics\ResourceUserDownloadData.cs" />
     <Compile Include="Statistics\DownloadEqualityComparer.cs" />
     <Compile Include="Downloads\DownloadInfo.cs" />
-    <Compile Include="Statistics\DownloadStatisticsCalculator.cs" />
+    <Compile Include="Statistics\DownloadStatisticCalculator.cs" />
     <Compile Include="Downloads\DownloadStorage.cs" />
     <Compile Include="Statistics\ResourceDownloadCount.cs" />
     <Compile Include="Statistics\ResourceUserDownload.cs" />
-    <Compile Include="Users\UserProvider.cs" />
+    <Compile Include="Statistics\IDownloadStatisticCalculator.cs" />
+    <Compile Include="Users\IUserProvider.cs" />
+    <Compile Include="Users\IUserStorage.cs" />
+    <Compile Include="Users\CookieUserProvider.cs" />
     <Compile Include="Users\UserInfo.cs" />
     <Compile Include="Users\UserStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

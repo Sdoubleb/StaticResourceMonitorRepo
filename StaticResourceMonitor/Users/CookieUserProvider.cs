@@ -3,14 +3,14 @@ using System.Web;
 
 namespace StaticResourceMonitor.Users
 {
-    public class UserProvider
+    public class CookieUserProvider : IUserProvider
     {
         private const string USER_COOKIE_NAME = "user-id";
 
         private readonly HttpContextBase _context;
-        private readonly UserStorage _storage;
+        private readonly IUserStorage _storage;
 
-        public UserProvider(HttpContextBase context, UserStorage storage)
+        public CookieUserProvider(HttpContextBase context, IUserStorage storage)
         {
             _context = context;
             _storage = storage;

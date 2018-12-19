@@ -3,6 +3,9 @@ using StaticResourceMonitor.Users;
 
 namespace StaticResourceMonitor.Statistics
 {
+    /// <summary>
+    /// Отражает информацию о последней загрузке ресурса определённым пользователем.
+    /// </summary>
     public class ResourceUserDownload
     {
         public ResourceUserDownload(string resource, UserInfo user)

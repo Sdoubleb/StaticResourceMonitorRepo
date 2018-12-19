@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 
 namespace StaticResourceMonitor.Users
 {
-    public class UserStorage
+    public class UserStorage : IUserStorage
     {
         private ConcurrentDictionary<Guid, UserInfo> _users = new ConcurrentDictionary<Guid, UserInfo>();
 

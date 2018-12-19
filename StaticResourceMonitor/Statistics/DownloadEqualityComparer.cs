@@ -4,7 +4,7 @@ using StaticResourceMonitor.Downloads;
 
 namespace StaticResourceMonitor.Statistics
 {
-    partial class DownloadStatisticsCalculator
+    partial class DownloadStatisticCalculator
     {
         private class DownloadEqualityComparer : IEqualityComparer<DownloadInfo>
         {
