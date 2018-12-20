@@ -1,4 +1,5 @@
 ﻿using System;
+using StaticResourceMonitor.Resources;
 using StaticResourceMonitor.Users;
 
 namespace StaticResourceMonitor.Statistics
@@ -8,10 +9,10 @@ namespace StaticResourceMonitor.Statistics
     /// </summary>
     public class ResourceUserDownload
     {
-        public ResourceUserDownload(string resource, UserInfo user)
+        public ResourceUserDownload(ResourceInfo resource, UserInfo user)
             : this(resource, user, default(DateTime)) { }
 
-        public ResourceUserDownload(string resource, UserInfo user,
+        public ResourceUserDownload(ResourceInfo resource, UserInfo user,
             DateTime lastDownloadDateTime)
         {
             Resource = resource;
@@ -19,7 +20,7 @@ namespace StaticResourceMonitor.Statistics
             LastDownloadDateTime = lastDownloadDateTime;
         }
         
-        public string Resource { get; }
+        public ResourceInfo Resource { get; }
         
         public UserInfo User { get; }
         

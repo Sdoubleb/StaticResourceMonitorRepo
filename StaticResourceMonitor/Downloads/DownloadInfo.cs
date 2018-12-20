@@ -1,17 +1,18 @@
 ﻿using System;
+using StaticResourceMonitor.Resources;
 using StaticResourceMonitor.Users;
 
 namespace StaticResourceMonitor.Downloads
 {
     public class DownloadInfo
     {
-        public DownloadInfo(string reference, UserInfo user)
+        public DownloadInfo(ResourceInfo resource, UserInfo user)
         {
-            Reference = reference ?? throw new ArgumentNullException(paramName: nameof(reference));
+            Resource = resource ?? throw new ArgumentNullException(paramName: nameof(resource));
             User = user ?? throw new ArgumentNullException(paramName: nameof(user));
         }
 
-        public string Reference { get; }
+        public ResourceInfo Resource { get; }
         public UserInfo User { get; }
 
         public DateTime DateTime { get; } = DateTime.Now;

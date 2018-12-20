@@ -20,7 +20,7 @@ namespace StaticResourceMonitor.Controllers
         {
             return _calculator.GetUserDownloadStatistics().Select(s => new ResourceUserDownloadData
             {
-                Resource = s.Resource,
+                Resource = s.Resource.Reference,
                 User = s.User.Id,
                 LastDownloadDateTime = s.LastDownloadDateTime
             });
@@ -31,7 +31,7 @@ namespace StaticResourceMonitor.Controllers
         {
             return _calculator.GetDownloadCountStatistics().Select(s => new ResourceDownloadCountData
             {
-                Resource = s.Resource,
+                Resource = s.Resource.Reference,
                 DownloadCount = s.DownloadCount
             });
         }

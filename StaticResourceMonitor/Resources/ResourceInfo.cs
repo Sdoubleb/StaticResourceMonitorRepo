@@ -5,12 +5,14 @@ namespace StaticResourceMonitor.Resources
 {
     public class ResourceInfo
     {
-        public ResourceInfo(string reference)
+        internal ResourceInfo(string reference)
         {
-            if (String.IsNullOrWhiteSpace(reference))
+            string decoded = Utils.DecodeUrl(reference);
+
+            if (String.IsNullOrWhiteSpace(decoded))
                 throw new ArgumentNullException(paramName: nameof(reference));
 
-            Reference = Utils.DecodeUrl(reference);
+            Reference = decoded;
         }
 
         public string Reference { get; }

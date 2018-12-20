@@ -14,7 +14,7 @@ namespace StaticResourceMonitor.Statistics
         {
             _allDownloads = storage.GetAllDownloads();
             _userDownloadStatistics = _allDownloads.GroupBy(d => d, new DownloadEqualityComparer())
-                .Select(g => new ResourceUserDownload(g.Key.Reference, g.Key.User)
+                .Select(g => new ResourceUserDownload(g.Key.Resource, g.Key.User)
                 {
                     LastDownloadDateTime = g.Max(d => d.DateTime)
                 });

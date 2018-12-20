@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using StaticResourceMonitor.Downloads;
 using StaticResourceMonitor.Helpers;
 using StaticResourceMonitor.Models.StaticResource;
+using StaticResourceMonitor.Resources;
 using StaticResourceMonitor.Users;
 
 namespace StaticResourceMonitor.Controllers
@@ -13,11 +14,14 @@ namespace StaticResourceMonitor.Controllers
     public class StaticResourceController : AsyncController
     {
         private readonly UserInfo _user;
+        private readonly IResourceStorage _resourceStorage;
         private readonly IDownloadStorage _downloadStorage;
 
-        public StaticResourceController(UserInfo user, IDownloadStorage downloadStorage)
+        public StaticResourceController(UserInfo user,
+            ResourceStorage resourceStorage, IDownloadStorage downloadStorage)
         {
             _user = user;
+            _resourceStorage = resourceStorage;
             _downloadStorage = downloadStorage;
         }
 
@@ -74,7 +78,8 @@ namespace StaticResourceMonitor.Controllers
 
         private void RegisterDownload(string reference)
         {
-            var download = new DownloadInfo(reference, _user);
+            ResourceInfo resource = _resourceStorage.GetOrAddResource(reference);
+            var download = new DownloadInfo(resource, _user);
             _downloadStorage.RegisterDownload(download);
         }
 

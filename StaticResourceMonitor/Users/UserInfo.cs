@@ -4,7 +4,7 @@ namespace StaticResourceMonitor.Users
 {
     public class UserInfo
     {
-        public UserInfo(Guid id)
+        internal UserInfo(Guid id)
         {
             Id = id;
         }
