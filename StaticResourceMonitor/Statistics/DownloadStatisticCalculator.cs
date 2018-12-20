@@ -4,7 +4,7 @@ using StaticResourceMonitor.Downloads;
 
 namespace StaticResourceMonitor.Statistics
 {
-    public partial class DownloadStatisticCalculator
+    public partial class DownloadStatisticCalculator : IDownloadStatisticCalculator
     {
         private readonly IEnumerable<DownloadInfo> _allDownloads;
         private readonly IEnumerable<ResourceUserDownload> _userDownloadStatistics;
