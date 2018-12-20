@@ -5,18 +5,14 @@ namespace StaticResourceMonitor.Users
 {
     public class UserStorage : IUserStorage
     {
-        private ConcurrentDictionary<Guid, UserInfo> _users = new ConcurrentDictionary<Guid, UserInfo>();
+        private const int INITIAL_CAPACITY = Byte.MaxValue + 1;
 
-        public void AddUser(UserInfo user)
-        {
-            if (_users.ContainsKey(user.Id))
-                throw new InvalidOperationException();
-            _users[user.Id] = user;
-        }
+        private ConcurrentDictionary<Guid, UserInfo> _users
+            = new ConcurrentDictionary<Guid, UserInfo>(Environment.ProcessorCount, INITIAL_CAPACITY);
 
-        public UserInfo GetUser(Guid id)
+        public UserInfo GetOrAddUser(Guid id)
         {
-            return _users.TryGetValue(id, out UserInfo user) ? user : null;
+            return _users.GetOrAdd(id, key => new UserInfo(key));
         }
     }
 }

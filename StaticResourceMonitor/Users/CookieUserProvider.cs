@@ -19,18 +19,10 @@ namespace StaticResourceMonitor.Users
         public UserInfo ProvideUser()
         {
             if (!Guid.TryParse(GetUserIdFromCookie(), out Guid userId))
-            {
                 userId = Guid.NewGuid();
-                SetUserIdIntoCookie(userId.ToString());
-            }
+            SetUserIdIntoCookie(userId.ToString());
 
-            UserInfo user = _storage.GetUser(userId);
-            if (user == null)
-            {
-                user = new UserInfo(userId);
-                _storage.AddUser(user);
-            }
-
+            UserInfo user = _storage.GetOrAddUser(userId);
             return user;
         }
 
