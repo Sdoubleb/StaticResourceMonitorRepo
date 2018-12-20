@@ -380,11 +380,15 @@
     </Compile>
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Models\StaticResource\StaticResourceConstants.cs" />
-    <Compile Include="Models\StaticResource\StaticResourceInfo.cs" />
+    <Compile Include="Models\StaticResource\StaticResource.cs" />
     <Compile Include="Models\StaticResource\StaticResourceInfoExtractor.cs" />
-    <Compile Include="Models\StaticResource\StaticResourceInfoValidationAttribute.cs" />
+    <Compile Include="Models\StaticResource\StaticResourceValidationAttribute.cs" />
     <Compile Include="Models\Statistics\ResourceDownloadCountData.cs" />
     <Compile Include="Models\Statistics\ResourceUserDownloadData.cs" />
+    <Compile Include="Resources\IResourceStorage.cs" />
+    <Compile Include="Resources\ReferenceEqualityComparer.cs" />
+    <Compile Include="Resources\ResourceInfo.cs" />
+    <Compile Include="Resources\ResourceStorage.cs" />
     <Compile Include="Statistics\DownloadEqualityComparer.cs" />
     <Compile Include="Downloads\DownloadInfo.cs" />
     <Compile Include="Statistics\DownloadStatisticCalculator.cs" />

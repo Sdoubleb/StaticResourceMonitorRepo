@@ -6,15 +6,15 @@ namespace StaticResourceMonitor.Models.StaticResource
 {
     class StaticResourceInfoExtractor
     {
-        private readonly StaticResourceInfo _info;
+        private readonly StaticResource _resource;
         private readonly string _fileName;
 
-        public StaticResourceInfoExtractor(StaticResourceInfo info)
+        public StaticResourceInfoExtractor(StaticResource resource)
         {
-            if (!StaticResourceConstants.IsMatch(info.Reference, out _fileName))
+            if (!StaticResourceConstants.IsMatch(resource.Reference, out _fileName))
                 throw new InvalidOperationException();
 
-            _info = info;
+            _resource = resource;
         }
 
         public string GetMimeType()

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace StaticResourceMonitor.Helpers
 {
@@ -16,6 +17,11 @@ namespace StaticResourceMonitor.Helpers
             Match match = ResponseCodeRegExpr.Match(exception.Message);
             responseCode = match.Success ? Int32.Parse(match.Value) : 0;
             return match.Success;
+        }
+
+        public static string DecodeUrl(string url)
+        {
+            return HttpUtility.UrlDecode(url).ToLowerInvariant();
         }
     }
 }

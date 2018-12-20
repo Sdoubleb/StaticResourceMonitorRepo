@@ -7,8 +7,8 @@ namespace StaticResourceMonitor.Downloads
     {
         public DownloadInfo(string reference, UserInfo user)
         {
-            Reference = reference;
-            User = user;
+            Reference = reference ?? throw new ArgumentNullException(paramName: nameof(reference));
+            User = user ?? throw new ArgumentNullException(paramName: nameof(user));
         }
 
         public string Reference { get; }

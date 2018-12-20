@@ -1,6 +1,7 @@
 using System;
 using System.Web;
 using StaticResourceMonitor.Downloads;
+using StaticResourceMonitor.Resources;
 using StaticResourceMonitor.Statistics;
 using StaticResourceMonitor.Users;
 using Unity;
@@ -47,6 +48,7 @@ namespace StaticResourceMonitor
             // container.LoadConfiguration();
 
             container.RegisterInstance<IUserStorage>(new UserStorage());
+            container.RegisterInstance<IResourceStorage>(new ResourceStorage());
             container.RegisterInstance<IDownloadStorage>(new DownloadStorage());
 
             container.RegisterType<IUserProvider>(new PerRequestLifetimeManager(),

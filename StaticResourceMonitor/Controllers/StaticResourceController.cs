@@ -28,16 +28,16 @@ namespace StaticResourceMonitor.Controllers
         }
 
         [HttpPost, ActionName("Download")]
-        public async Task<ActionResult> DownloadAsync(StaticResourceInfo info)
+        public async Task<ActionResult> DownloadAsync(StaticResource resource)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    MemoryStream stream = await GetStaticResourceStreamAsync(info.Reference);                    
-                    (string mimeType, string fileName) = ExtractStaticResourceInfo(info);
+                    MemoryStream stream = await GetStaticResourceStreamAsync(resource.Reference);                    
+                    (string mimeType, string fileName) = ExtractStaticResourceInfo(resource);
 
-                    RegisterDownload(info.Reference);
+                    RegisterDownload(resource.Reference);
 
                     return File(stream, mimeType, fileName);
                 }
@@ -64,9 +64,9 @@ namespace StaticResourceMonitor.Controllers
             }
         }
 
-        private (string mimeType, string fileName) ExtractStaticResourceInfo(StaticResourceInfo info)
+        private (string mimeType, string fileName) ExtractStaticResourceInfo(StaticResource resource)
         {
-            var infoExtractor = new StaticResourceInfoExtractor(info);
+            var infoExtractor = new StaticResourceInfoExtractor(resource);
             string mimeType = infoExtractor.GetMimeType();
             string fileName = infoExtractor.GetFileName();
             return (mimeType, fileName);

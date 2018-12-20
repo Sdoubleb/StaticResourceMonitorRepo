@@ -21,7 +21,10 @@ namespace StaticResourceMonitor.Downloads
 
         public IEnumerable<DownloadInfo> GetAllDownloads()
         {
-            return _downloads.ToArray();
+            lock (_locker)
+            {
+                return _downloads.ToArray();
+            }
         }
     }
 }
