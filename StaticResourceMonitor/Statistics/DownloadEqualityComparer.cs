@@ -6,7 +6,7 @@ namespace StaticResourceMonitor.Statistics
     partial class DownloadStatisticCalculator
     {
         // загрузки в общем случае не стоит сравнивать на основании значений их свойств,
-        // поэтому создаём comparer для данного конкретного случая
+        // поэтому создаём свой собственный comparer только для данного конкретного случая
         private class DownloadEqualityComparer : IEqualityComparer<DownloadInfo>
         {
             public bool Equals(DownloadInfo x, DownloadInfo y)

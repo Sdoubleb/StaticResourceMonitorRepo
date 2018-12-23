@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace StaticResourceMonitor.Models.Statistics
 {
+    // снабжаем атрибутами для возможнсти сериализации в XML при ответе для браузера
     [DataContract]
     public class ResourceUserDownloadData
     {
