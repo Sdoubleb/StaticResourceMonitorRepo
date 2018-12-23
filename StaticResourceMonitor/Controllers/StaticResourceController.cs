@@ -18,7 +18,7 @@ namespace StaticResourceMonitor.Controllers
         private readonly IDownloadStorage _downloadStorage;
 
         public StaticResourceController(UserInfo user,
-            ResourceStorage resourceStorage, IDownloadStorage downloadStorage)
+            IResourceStorage resourceStorage, IDownloadStorage downloadStorage)
         {
             _user = user;
             _resourceStorage = resourceStorage;
